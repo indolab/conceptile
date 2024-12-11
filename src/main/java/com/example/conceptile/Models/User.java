@@ -1,4 +1,3 @@
-import javax.annotation.processing.Generated;
 
 @Entity
 @Table(names="User")
