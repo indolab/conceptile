@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.conceptile.Models.Question;
@@ -40,8 +39,10 @@ public class QuizController {
     }
 
     @GetMapping("/results")
-    public String getResults(@RequestParam Long sessionId) {
-        return "working";
+    public float getResult(@RequestBody Map<String, Integer> payload) {
+        Integer userid = payload.get("userid");
+        return quizService.getRes(userid);
+        
     }
 }
 

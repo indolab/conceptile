@@ -25,15 +25,12 @@ public class QuizService {
     
 
  
-
-
-   
-
     public String startNewQuiz(Integer id) {
         
-       String wel = "welconm user  ";
-       
-     return wel;
+       String wel = "welconm   ";
+       Optional<User> usr = userrepo.findById(id);
+        User user = usr.get();
+       return wel.concat(user.getName()).concat("   id -->").concat(Integer.toString(id));
        
     }
 
@@ -42,8 +39,8 @@ public class QuizService {
         if (questions.isEmpty()) {
             throw new RuntimeException("No questions available");
         }
-        
-        return questions.get(2);
+        int randomNumber = (int)(Math.random() * (questions.size()-1 - 0 + 1)) + 0;
+        return questions.get(randomNumber);
     }
 
     public String submitAnswer(Long questionId, String answer, Integer UserID) {
@@ -52,13 +49,7 @@ public class QuizService {
         if (questionOpt.isEmpty()) {
             return "Invalid session or question ID";
         }
-        
-        if (!questionOpt.isPresent()) {
-        System.out.println("Fetched Question: " + questionOpt.get());
-        System.out.println("Correct Answer: " + questionOpt.get().getCorrectAnswer());
-}
 
-        
         Question question = questionOpt.get();
         if (question.getCorrectAnswer() == null) {
             return "Correct answer for the question is not set.";
@@ -74,18 +65,22 @@ public class QuizService {
             userrepo.save(user);
            
             return "Yay ! Doind good";
-            
-
         }
 
         else {
-        
         user.setTotal();
         userrepo.save(user);
-
         return "OOPS! wrong answer";
-
         }
+    }
+
+    public float getRes(Integer id){
+        Optional<User> usr = userrepo.findById(id);
+        User user = usr.get();
+        float res1 = (float)(user.getCorrect());
+        float res2 = (float)(user.getTotal());
+        float res = (res1/res2)*100;
+        return res;
     }
 
    

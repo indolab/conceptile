@@ -24,7 +24,7 @@ public class Question {
     @Column(name = "correct_answer")
     private String correctAnswer;
 
-    // Getters and setters
+   
     public Long getId() {
         return id;
     }
