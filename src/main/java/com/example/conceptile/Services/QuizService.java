@@ -27,10 +27,10 @@ public class QuizService {
  
     public String startNewQuiz(Integer id) {
         
-       String wel = "welconm   ";
+       String wel = "welconme   ";
        Optional<User> usr = userrepo.findById(id);
         User user = usr.get();
-       return wel.concat(user.getName()).concat("   id -->").concat(Integer.toString(id));
+       return wel.concat(user.getName()).concat("   id -->  ").concat(Integer.toString(id));
        
     }
 
